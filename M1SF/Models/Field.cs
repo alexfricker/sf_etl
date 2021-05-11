@@ -13,5 +13,6 @@ namespace M1SF.Models
         public int Precision { get; set; }
         public int Length { get; set; }
         public bool Nullable { get; set; }
+        //public List<Field> ChildFields (Address DT)
     }
 }

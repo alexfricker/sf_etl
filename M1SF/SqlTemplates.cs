@@ -21,18 +21,15 @@ namespace M1SF
             FROM INFORMATION_SCHEMA.ROUTINES
             WHERE ROUTINE_TYPE = 'PROCEDURE'";
         }
-
         public static string GetTargetSchemas()
         {
             return @"SELECT [name] = SCHEMA_NAME
             FROM INFORMATION_SCHEMA.SCHEMATA";
         }
-
         public static string CreateTargetSchema(string SchemaName)
         {
             return @"CREATE SCHEMA [" + SchemaName + "];";
         }
-
         private static string GetFieldSql(Field field)
         {
             var SqlField = "\n\t\t["
@@ -44,7 +41,6 @@ namespace M1SF
 
             return SqlField;
         }
-
         private static string GetDataTypeSql(Field field)
         {
             string result = "[" + field.TargetDatatype + "]";
@@ -73,7 +69,6 @@ namespace M1SF
 
             return result;
         }
-
         public static string TargetTableDefinition(TargetObject Target)
         {
             string Query = "";
@@ -98,12 +93,10 @@ namespace M1SF
 
             return Query;
         }
-
         public static string DropTableSql(TargetObject Target)
         {
             return "DROP TABLE IF EXISTS [" + Target.Schema + "].[" + Target.Name + "]\n";
         }
-
         public static string StageMergeProcDefinition(TargetObject Target)
         {
             int c = 1;
@@ -211,13 +204,11 @@ WHERE ";
     ,[BatchId] INT NOT NULL
 )";
         }
-
         public static string AddJsonSql(string Sobject, int BatchId, string json)
         {
             return @"INSERT INTO [" + StaticResources.JsonSchema + @"].[" + Sobject + @"] (JsnBody,BatchId)
 VALUES (N'" + json.Replace("'", "''") + "', " + BatchId.ToString() + ");";
         }
-
         public static string JsonViewDefinition(TargetObject Target)
         {
             string ViewName = "[" + Target.Schema + "].[" + StaticResources.ViewPrefix + "_" + Target.Name + "]";
@@ -306,7 +297,6 @@ VALUES (N'" + json.Replace("'", "''") + "', " + BatchId.ToString() + ");";
 
             return query;
         }
-
         public static string DropJsonViewSql(TargetObject Target)
         {
             string ViewName = "[" + Target.Schema + "].[" + StaticResources.ViewPrefix + "_" + Target.Name + "]";
@@ -342,7 +332,6 @@ VALUES (N'" + json.Replace("'", "''") + "', " + BatchId.ToString() + ");";
 
             return jsonBatches;
         }
-
         public static string GetStageSql(TargetObject Target)
         {
             string query = "INSERT INTO [" + StaticResources.StageSchema + "].[" + Target.Name + "]\n(";
@@ -375,7 +364,6 @@ VALUES (N'" + json.Replace("'", "''") + "', " + BatchId.ToString() + ");";
 
             return query;
         }
-
         private static string GetNullReplacement(Field field)
         {
             string nullrepl = "";
@@ -399,6 +387,15 @@ VALUES (N'" + json.Replace("'", "''") + "', " + BatchId.ToString() + ");";
             }
 
             return nullrepl;
+        }
+        public static void AddTargetColumn()
+        {
+            // ALTER TABLE x ADD col
+        }
+        public static void AlterTargetColumn()
+        {
+            // ALTER TABLE x ALTER COLUMN col
+            // handle deletes? set col = nullable
         }
 
     }

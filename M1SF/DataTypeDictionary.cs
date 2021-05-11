@@ -18,7 +18,7 @@ namespace M1SF
             dictionary.Add("reference",         "nvarchar");
             dictionary.Add("textarea",          "nvarchar");
             dictionary.Add("double",            "decimal");
-            dictionary.Add("address",           "nvarchar");
+            dictionary.Add("address",           "nvarchar"); // this needs some attention
             dictionary.Add("email",             "nvarchar");
             dictionary.Add("phone",             "nvarchar");
             dictionary.Add("int",               "int");
