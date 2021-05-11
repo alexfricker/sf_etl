@@ -73,10 +73,6 @@ namespace M1SF.Services
             }
             return tSchema;
         }
-        private static TargetObject GetTargetObjectSchema()
-        {
-            return new TargetObject();
-        }
         private static bool SobjectExists(string Token, string InstanceUri, string Sobject)
         {
             string json = GetSObjects(Token, InstanceUri);
